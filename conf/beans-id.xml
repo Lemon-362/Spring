@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="s1" class="com.Lemon.Spring1.id.Student">
+        <property name="id" value="1"/>
+        <property name="name" value="dada1"/>
+        <property name="age" value="25"/>
+        <property name="sex" value="男"/>
+    </bean>
+
+
+    <bean id="s2" class="com.Lemon.Spring1.id.Student">
+        <constructor-arg value="2" type="java.lang.Integer"/>
+        <constructor-arg value="dada2" type="java.lang.String"/>
+        <constructor-arg value="男" type="java.lang.String"/>
+        <constructor-arg value="100.0" type="java.lang.Double"/>
+    </bean>
+
+
+    <bean id="s3" class="com.Lemon.Spring1.id.Student"
+          p:id="3" p:name="dada3" p:age="25" p:sex="男" p:score="100.0" p:teacher-ref="teacher">
+    </bean>
+
+    <bean id="teacher" class="com.Lemon.Spring1.id.Teacher">
+        <property name="tId" value="1001"/>
+        <property name="tName" value="小红"/>
+    </bean>
+
+
+    <bean id="s4" class="com.Lemon.Spring1.id.Student">
+        <property name="id" value="4"/>
+        <property name="name" value="dada4"/>
+        <property name="age" value="25"/>
+        <property name="sex" value="男"/>
+
+<!--        <property name="teacher" ref="teacher"/>-->
+
+        <property name="teacher">
+            <bean id="tt" class="com.Lemon.Spring1.id.Teacher">
+                <property name="tName" value="小明"/>
+                <property name="tId" value="1002"/>
+            </bean>
+        </property>
+    </bean>
+
+
+    <bean id="t1" class="com.Lemon.Spring1.id.Teacher">
+        <property name="tId" value="10000"/>
+        <property name="tName" value="Lemon1"/>
+
+<!--        <property name="students">-->
+<!--            <list>-->
+<!--                <ref bean="s1"/>-->
+<!--                <ref bean="s2"/>-->
+<!--            </list>-->
+<!--        </property>-->
+
+        <property name="students" ref="students"/>
+    </bean>
+
+
+    <util:list id="students">
+        <ref bean="s1"/>
+        <ref bean="s2"/>
+        <ref bean="s3"/>
+    </util:list>
+
+
+    <bean id="t2" class="com.Lemon.Spring1.id.Teacher">
+        <property name="tId" value="10001"/>
+        <property name="tName" value="Lemon2"/>
+        <property name="bossMap">
+            <map>
+                <entry key="100" value="苍老师"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
